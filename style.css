@@ -1,0 +1,43 @@
+/* ReadSmith 공개 페이지(지원·개인정보 처리방침). 머리 색은 앱 아이콘의 위·아래 띠에서 뽑았다(#2C394F → #605753).
+   틀은 Nanopik 공개 페이지와 같다(전역 규칙: 지원·개인정보 URL 은 앱 저장소 Site/ 원본 → 공개 저장소 <앱>-site). */
+:root{
+  --head-1:#2C394F; --head-2:#605753; --gold:#C9A86A;
+  --bg:#ffffff; --fg:#1b1a18; --dim:#5f5b55; --line:#e6e2da; --card:#f8f6f1; --link:#2a5db0;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121110; --fg:#ece8e1; --dim:#a39d93; --line:#2c2925; --card:#1a1816; --link:#8fb4ee;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121110; --fg:#ece8e1; --dim:#a39d93; --line:#2c2925; --card:#1a1816; --link:#8fb4ee;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);
+  font:16px/1.75 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased}
+header{background:linear-gradient(160deg,var(--head-1),var(--head-2));color:#fff;
+  padding:56px 16px 48px;text-align:center}
+header img{width:96px;height:96px;border-radius:21.5px;display:block;margin:0 auto 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3)}
+header h1{margin:0;font-size:30px;letter-spacing:-.5px}
+header p{margin:8px 0 0;opacity:.88;font-size:16px}
+main{max-width:720px;margin:0 auto;padding:0 16px 80px}
+section{padding-top:40px}
+h2{font-size:21px;margin:0 0 10px;letter-spacing:-.3px}
+h3{font-size:16px;margin:26px 0 6px}
+.dim{color:var(--dim)}
+ul{padding-left:20px;margin:8px 0}
+li{margin:4px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:18px 20px;margin:14px 0}
+a{color:var(--link)}
+footer{max-width:720px;margin:0 auto;padding:22px 16px 60px;color:var(--dim);font-size:13px}
+.lang{display:flex;gap:6px;justify-content:center;margin-top:22px}
+.lang button{border:1px solid rgba(255,255,255,.45);background:rgba(255,255,255,.14);color:#fff;
+  padding:6px 14px;border-radius:999px;font:inherit;font-size:14px;cursor:pointer;min-height:36px}
+.lang button[aria-pressed="true"]{background:#fff;color:var(--head-1);border-color:#fff;font-weight:600}
+/* ⛔ 선택자를 `[lang]` 으로 두지 말 것 — <html lang="…"> 까지 걸려 페이지가 통째로 사라진다(Nanopik 에서 겪음). */
+[data-loc]{display:none}
+[data-loc].on{display:block}
+span[data-loc].on{display:inline}
+@media (max-width:520px){header{padding:40px 16px 36px}header h1{font-size:25px}}
