@@ -6,9 +6,11 @@
 <meta name="description" content="ReadSmith는 개발자에게 어떤 개인정보도 보내지 않습니다. ReadSmith sends no personal data to the developer.">
 <link rel="stylesheet" href="style.css">
 <link rel="icon" href="icon.png">
-<!-- ⛔ 사실만 쓴다 — 코드에서 확인한 것(2026-10-26): 앱에 분석·광고·추적 코드 없음, 개발자 서버 없음.
-     바깥 통신은 사용자 본인의 iCloud(키-값 저장소·CloudKit 비공개 DB·iCloud Drive)와, 책 속 링크를 사용자가 눌렀을 때
-     기본 브라우저로 여는 것뿐. 책 본문 화면(WKWebView)은 바깥 주소를 막는다(WebReader.blockNetwork).
+<!-- ⛔ 사실만 쓴다 — 코드에서 확인한 것(2026-10-27): 앱에 분석·광고·추적 코드 없음, 개발자 서버 없음.
+     바깥 통신은 사용자가 고른 곳뿐 — 본인의 iCloud(키-값 저장소·CloudKit 비공개 DB·iCloud Drive), Google Drive(drive.file 하나 —
+     accounts.google.com·oauth2.googleapis.com·www.googleapis.com/drive), 사용자가 입력한 WebDAV 서버, 고른 폴더 — 와 책 속 링크를 사용자가 눌렀을 때
+     기본 브라우저로 여는 것.
+     구글 «브랜드 검증»은 처리방침이 Google 사용자 데이터의 접근·사용·저장·공유를 밝히기를 요구한다(Brand verification 문서). 책 본문 화면(WKWebView)은 바깥 주소를 막는다(WebReader.blockNetwork).
      낭독은 기기 안 모델로 만들고 소리를 저장하지 않는다. 기능이 바뀌면 이 문서와 App Store 개인정보 설문을 함께 고친다. -->
 <header>
   <img src="icon.png" alt="ReadSmith">
@@ -24,9 +26,10 @@
   <h2>한 줄로 말하면</h2>
   <div class="card">
     <p style="margin:0"><b>ReadSmith는 개발자에게 어떤 개인정보도 보내지 않습니다.</b>
-       개발자가 운영하는 서버가 없고, 계정도 없고, 사용 기록도 모으지 않습니다.</p>
+       개발자가 운영하는 서버가 없고, 계정도 없고, 사용 기록도 모으지 않습니다.
+       책과 기록은 기기 안에, 그리고 사용자가 고른 클라우드(본인의 iCloud · Google Drive · WebDAV 서버)에만 저장됩니다.</p>
   </div>
-  <p class="dim">시행일 2026년 10월 26일</p>
+  <p class="dim">시행일 2026년 10월 27일</p>
 
   <h2>모으지 않는 것</h2>
   <ul>
@@ -37,23 +40,40 @@
   </ul>
   <p>앱에는 분석 도구, 광고, 추적 코드가 들어 있지 않습니다.</p>
 
-  <h2>선생님의 iCloud에 저장되는 것</h2>
-  <p>여러 기기에서 이어 읽을 수 있도록, 아래 항목은 <b>선생님 본인의 iCloud 계정</b>에 저장됩니다.
-     Apple이 보관하며, 개발자는 이 내용을 볼 수 없습니다.</p>
+  <h2>고른 클라우드에 저장되는 것</h2>
+  <p>여러 기기에서 이어 읽을 수 있도록, 설정의 «클라우드»에서 고른 곳에 아래 항목이 저장됩니다. 고르지 않은 곳에는 아무것도 보내지 않습니다.</p>
   <ul>
-    <li><b>읽던 자리</b>, <b>보기 설정 프리셋</b>, <b>리모컨 설정</b>, <b>서재 폴더 정리</b></li>
-    <li><b>밑줄·형광펜·북마크</b> — 표시한 문구의 앞뒤 몇 글자와 함께 저장됩니다.</li>
-    <li><b>책 파일</b> — 설정에서 «책을 iCloud Drive에 두기»를 켜면, 넣은 책이 iCloud Drive의 «ReadSmith» 폴더에 복사됩니다.</li>
+    <li><b>책 파일</b> — «책 파일 동기화»에서 고른 곳에 이 기기에서 넣은 책이 올라가고, 책 메뉴로 직접 올린 책도 그곳에 들어갑니다. iCloud에는 다른 기기에서 보일 작은 표지 그림도 함께 둡니다.</li>
+    <li><b>기록과 설정</b> — «기록과 설정 동기화»에서 켠 곳에 읽던 자리, 밑줄·형광펜·북마크(표시한 문구의 앞뒤 몇 글자 포함), 보기 설정 프리셋, 리모컨 설정이 저장됩니다. 책은 제목이 아니라 책 내용으로 만든 번호로 구분합니다.</li>
   </ul>
-  <p>iCloud를 쓰지 않거나 꺼 두면 이 항목들은 기기 안에만 남습니다.</p>
+
+  <h3>iCloud</h3>
+  <p>본인의 iCloud 계정(키-값 저장소, CloudKit 비공개 데이터베이스, iCloud Drive의 «ReadSmith» 폴더)에 저장됩니다. Apple이 보관하며, 개발자는 이 내용을 볼 수 없습니다.
+     기기의 iCloud 설정에서 지울 수 있습니다.</p>
+
+  <h3>Google Drive</h3>
+  <p>Google Drive를 연결하면 ReadSmith는 Google 계정 데이터에 아래와 같이 접근합니다.</p>
+  <ul>
+    <li><b>접근 범위</b> — <code>drive.file</code> 권한 하나만 요청합니다. ReadSmith가 만든 «ReadSmith» 폴더와 그 안의 파일, 그리고 사용자가 Google 파일 선택 창에서 직접 고른 파일에만 접근할 수 있습니다. 드라이브의 다른 파일은 볼 수 없습니다.</li>
+    <li><b>사용</b> — 책 파일을 올리고 받고 목록을 읽습니다. 사용자가 고를 때 책을 지우며(드라이브 휴지통으로), 선택 창에서 고른 책은 «ReadSmith» 폴더로 복사해 가져옵니다. 기록과 설정은 그 폴더 안 «.sync» 폴더에 기기마다 파일 하나로 쓰고 읽습니다.</li>
+    <li><b>저장</b> — 이 데이터는 본인의 Google Drive에만 저장됩니다. 로그인 정보(갱신 토큰)는 이 기기의 키체인에만 두며 다른 기기로 옮기지 않습니다.</li>
+    <li><b>공유</b> — Google 사용자 데이터를 개발자나 다른 누구에게도 보내거나 팔지 않고, 광고에 쓰지 않으며, 사람이 읽지 않습니다. ReadSmith의 Google API 정보 사용은 제한적 사용(Limited Use) 요건을 포함한 <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API 서비스 사용자 데이터 정책</a>을 따릅니다.</li>
+    <li><b>끊기</b> — 설정에서 연결을 빼면 이 기기의 로그인 정보를 지웁니다. <a href="https://myaccount.google.com/permissions">Google 계정의 서드 파티 앱 액세스</a>에서 ReadSmith의 접근을 언제든 거둘 수 있습니다. 드라이브에 올린 파일은 그대로 남으며 드라이브에서 지울 수 있습니다.</li>
+  </ul>
+
+  <h3>WebDAV 서버</h3>
+  <p>사용자가 입력한 서버 주소로만 연결합니다. 그 서버의 책 목록을 읽고 책을 받아 오며, 고른 경우 책 파일과 기록(«.sync» 폴더)을 그 서버에 씁니다.
+     아이디와 비밀번호는 이 기기의 키체인에만 두고, 연결을 빼면 지웁니다. 집 밖의 주소는 암호화된 연결(https)로만 씁니다.</p>
+
+  <h3>폴더 연결</h3>
+  <p>파일 앱이나 파인더에서 고른 폴더의 책 목록을 읽고, 누른 책을 받아 옵니다. 그 폴더가 어느 서비스에 있는지는 그 서비스의 정책을 따릅니다.</p>
 
   <h2>기기 안에만 남는 것</h2>
   <ul>
-    <li>넣은 책과 표지, 직접 넣은 글꼴, 이 기기의 보기 설정</li>
+    <li>넣은 책과 표지, 직접 넣은 글꼴, 이 기기의 보기 설정, 서재 폴더 정리, 연결 정보</li>
     <li>문제를 찾기 위한 앱 자체 기록 파일(앱 전용 폴더에 남습니다)</li>
   </ul>
-  <p>앱을 지우면 기기 안의 항목은 운영체제가 앱 저장 공간과 함께 지웁니다.
-     iCloud에 저장된 항목은 기기의 iCloud 설정에서 지울 수 있습니다.</p>
+  <p>앱을 지우면 기기 안의 항목은 운영체제가 앱 저장 공간과 함께 지웁니다.</p>
 
   <h2>소리로 읽기</h2>
   <p>목소리는 <b>기기 안에서</b> 만들어집니다. 글을 바깥으로 보내지 않고, 만든 소리를 저장하지도 않습니다.
@@ -77,9 +97,10 @@
   <h2>In one line</h2>
   <div class="card">
     <p style="margin:0"><b>ReadSmith sends no personal data to the developer.</b>
-       There is no developer-run server, no account, and no usage is collected.</p>
+       There is no developer-run server, no account, and no usage is collected.
+       Your books and records are kept on your device and only in the clouds you choose (your own iCloud, Google Drive, or WebDAV server).</p>
   </div>
-  <p class="dim">Effective 26 October 2026</p>
+  <p class="dim">Effective 27 October 2026</p>
 
   <h2>What is not collected</h2>
   <ul>
@@ -90,23 +111,40 @@
   </ul>
   <p>The app contains no analytics, advertising, or tracking code.</p>
 
-  <h2>What is stored in your iCloud</h2>
-  <p>So you can continue reading on your other devices, the following is stored in <b>your own iCloud account</b>.
-     It is kept by Apple, and the developer cannot see it.</p>
+  <h2>What is stored in the clouds you choose</h2>
+  <p>So you can continue reading on your other devices, the following is stored in the places you choose under “Cloud” in Settings. Nothing is sent to a place you haven't chosen.</p>
   <ul>
-    <li><b>Reading positions</b>, <b>view presets</b>, <b>remote settings</b>, and <b>library folders</b></li>
-    <li><b>Underlines, highlights, and bookmarks</b> — saved with a few characters of the surrounding text.</li>
-    <li><b>Book files</b> — if you turn on “Keep Books in iCloud Drive” in Settings, books you add are copied to the “ReadSmith” folder in iCloud Drive.</li>
+    <li><b>Book files</b> — books you add on this device are uploaded to the place chosen in “Sync Book Files”, as are books you upload from a book's menu. In iCloud, small cover images are kept too so other devices can show them.</li>
+    <li><b>Records and settings</b> — the places turned on in “Sync Progress &amp; Settings” store your reading positions, underlines, highlights, and bookmarks (with a few characters of the surrounding text), view presets, and remote settings. Books are identified by a number made from the book's content, not by title.</li>
   </ul>
-  <p>If you don't use iCloud or turn it off, these stay on your device only.</p>
+
+  <h3>iCloud</h3>
+  <p>Stored in your own iCloud account (key-value storage, a private CloudKit database, and the “ReadSmith” folder in iCloud Drive). It is kept by Apple, and the developer cannot see it.
+     You can remove it from your device's iCloud settings.</p>
+
+  <h3>Google Drive</h3>
+  <p>When you connect Google Drive, ReadSmith accesses your Google account data as follows.</p>
+  <ul>
+    <li><b>Access</b> — ReadSmith requests only the <code>drive.file</code> permission. It can reach only the “ReadSmith” folder it creates and the files inside it, plus files you pick yourself in Google's file picker. It cannot see any other files in your Drive.</li>
+    <li><b>Use</b> — to upload, download, and list book files; to delete a book when you choose to (it goes to your Drive's trash); and to copy books you pick in the file picker into the “ReadSmith” folder. Records and settings are written and read as one file per device in a “.sync” folder inside that folder.</li>
+    <li><b>Storage</b> — this data is stored only in your Google Drive. The sign-in credential (refresh token) is kept only in this device's keychain and is never moved to another device.</li>
+    <li><b>Sharing</b> — Google user data is never sent or sold to the developer or anyone else, never used for advertising, and never read by people. ReadSmith's use of information received from Google APIs adheres to the <a href="https://developers.google.com/terms/api-services-user-data-policy">Google API Services User Data Policy</a>, including the Limited Use requirements.</li>
+    <li><b>Disconnecting</b> — removing the connection in Settings deletes the sign-in credential on this device. You can revoke ReadSmith's access at any time in <a href="https://myaccount.google.com/permissions">your Google Account's third-party app access</a>. Files already in your Drive stay there, and you can delete them in Drive.</li>
+  </ul>
+
+  <h3>WebDAV server</h3>
+  <p>ReadSmith connects only to the server address you enter. It reads the list of books on that server and downloads them, and, if you choose, writes book files and records (a “.sync” folder) to it.
+     Your user name and password are kept only in this device's keychain and are deleted when you remove the connection. Addresses outside your home network are used only over an encrypted connection (https).</p>
+
+  <h3>Connected folders</h3>
+  <p>ReadSmith reads the list of books in a folder you pick in Files or Finder and downloads the ones you tap. Whichever service holds that folder applies its own policy.</p>
 
   <h2>What stays on your device</h2>
   <ul>
-    <li>Books and covers you add, fonts you add, and this device's view settings</li>
+    <li>Books and covers you add, fonts you add, this device's view settings, library folders, and connection details</li>
     <li>A log file used to track down problems (kept in the app's own folder)</li>
   </ul>
-  <p>Deleting the app removes the on-device items along with its storage.
-     Items in iCloud can be removed from your device's iCloud settings.</p>
+  <p>Deleting the app removes the on-device items along with its storage.</p>
 
   <h2>Read Aloud</h2>
   <p>Voices are generated <b>on your device</b>. Text is never sent anywhere, and the audio is not saved.
