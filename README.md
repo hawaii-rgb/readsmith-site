@@ -1,9 +1,4 @@
-# ReadSmith — 공개 페이지
+# readsmith-site (옛 주소)
 
-전자책 리더 **ReadSmith**(iPhone·iPad·Mac)의 지원 페이지와 개인정보 처리방침입니다.
-App Store 가 이 두 주소를 필수로 요구합니다.
-
-- 지원 — https://hawaii-rgb.github.io/readsmith-site/
-- 개인정보 처리방침 — https://hawaii-rgb.github.io/readsmith-site/privacy.html
-
-원본은 앱 저장소의 `Site/` 에 있습니다. **여기 파일을 직접 고치지 마십시오** — 사본입니다.
+ReadSmith 공개 페이지는 **https://jwbstudio.app/readsmith/** 로 옮겼습니다(2026-10-30). 여기 두 쪽은 옛 링크(앱스토어 등)를 새 주소로 넘기는 것뿐입니다.
+원본은 ReadSmith 저장소의 `Site/` → 공개 저장소 `hawaii-rgb.github.io` 의 `readsmith/`.
